@@ -226,6 +226,43 @@ public abstract class Agent {
 		return tab_pos;
 	}
 
+	public int[] posCaseVideAutour(int i, int j) {
+		int espace_vide[] = new int[2]; // cherche espace vide
+										// if(posTypeAgentNorthEast()[2]==2)
+		espace_vide[0] = posTypeAgentNorthEast()[0];
+		espace_vide[1] = posTypeAgentNorthEast()[1];
+
+		if (posTypeAgentNorth()[2] == 2)
+			espace_vide[0] = posTypeAgentNorth()[0];
+		espace_vide[1] = posTypeAgentNorth()[1];
+
+		if (posTypeAgentEast()[2] == 2)
+			espace_vide[0] = posTypeAgentEast()[0];
+		espace_vide[1] = posTypeAgentEast()[1];
+
+		if (posTypeAgentSouthEast()[2] == 2)
+			espace_vide[0] = posTypeAgentSouthEast()[0];
+		espace_vide[1] = posTypeAgentSouthEast()[1];
+
+		if (posTypeAgentSouth()[2] == 2)
+			espace_vide[0] = posTypeAgentSouth()[0];
+		espace_vide[1] = posTypeAgentSouth()[1];
+
+		if (posTypeAgentSouthWest()[2] == 2)
+			espace_vide[0] = posTypeAgentSouthWest()[0];
+		espace_vide[1] = posTypeAgentSouthWest()[1];
+
+		if (posTypeAgentWest()[2] == 2)
+			espace_vide[0] = posTypeAgentWest()[0];
+		espace_vide[1] = posTypeAgentWest()[1];
+
+		if (posTypeAgentNorthWest()[2] == 2)
+			espace_vide[0] = posTypeAgentNorthWest()[0];
+		espace_vide[1] = posTypeAgentNorthWest()[1];
+
+		return espace_vide;
+	}
+
 	public boolean isAlive() {
 		return alive;
 	}

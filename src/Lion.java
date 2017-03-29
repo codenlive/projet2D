@@ -223,7 +223,7 @@ public class Lion extends Predator {
 
 	}
 
-	public void reproduce() {
+	/*public void reproduce() {
 
 		// cherche espace vide pour nouveau lion
 
@@ -252,6 +252,6 @@ public class Lion extends Predator {
 
 			}
 		}
-	}
+	}*/
 
 }
