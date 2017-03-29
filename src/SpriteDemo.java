@@ -264,8 +264,8 @@ public class SpriteDemo extends JPanel {
 		}
 
 		Lion l1 = new Lion(109, 10);
-
-		System.out.println(Agent.lions.size());
+		Insect ins = new Insect(10, 6);
+		System.out.println(Agent.insectes.size());
 
 		// maj dans nouveau tableau
 		for (int i = 0; i != 120; i++) {
@@ -277,8 +277,9 @@ public class SpriteDemo extends JPanel {
 		int yom = 1;
 		int i = 1;
 		while (i < 100000) {
+			System.out.println(Agent.insectes.size());
 
-			if (i % 15 == 0) {
+			if (i % 25 == 0) {
 				yom++;
 				if (yom % 2 == 0)
 					nuit = 1;
@@ -286,7 +287,7 @@ public class SpriteDemo extends JPanel {
 					nuit = 0;
 
 			}
-			System.out.println("yom: "+yom+"nuit:"+nuit);
+			// System.out.println("yom: "+yom+"nuit:"+nuit);
 
 			for (int k = 0; k != 120; k++) {
 				for (int l = 0; l != 64; l++) {
@@ -298,8 +299,20 @@ public class SpriteDemo extends JPanel {
 						// nuit
 
 						// lion
-						if (myWorld[k][l] == 6) {
+						if (myWorld[k][l] == lion.id) {
 							lion.moveDefault();
+						}
+					}
+					for (Insect insecte : Agent.insectes) {
+						insecte.posi = k;
+						insecte.posj = l;
+						// System.out.println(x);
+
+						// nuit
+
+						// insecte
+						if (myWorld[k][l] == insecte.id) {
+							insecte.moveDefault();
 						}
 					}
 					// arbreneige
@@ -307,7 +320,7 @@ public class SpriteDemo extends JPanel {
 					 * if(i%80==0&&myWorld[k][l]==3){ saison=2; }else{ saison=1;
 					 * }
 					 */
-					
+
 					repaint();
 					// crabe
 					if (myWorld[k][l] == 43) {
