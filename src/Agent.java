@@ -1,10 +1,7 @@
-import java.util.*;
-
+import java.util.ArrayList;
 public abstract class Agent {
 
 	boolean alive;
-	boolean infecte;
-	boolean contamine;
 	protected int age_reproductif;
 	protected int reserve_eau;
 	protected int reserve_food;
@@ -12,219 +9,33 @@ public abstract class Agent {
 	protected int id;
 	protected int endurance;
 	protected int sommeil;
-	// protected int hibernation;
+	//protected int hibernation;
 	protected int posi;
 	protected int posj;
 	protected int perimeterVisionOriental;
 	protected int perimeterVisionDiagonal;
-	public static ArrayList<Agent> agents = new ArrayList<Agent>();
-	public static ArrayList<Prey> proies = new ArrayList<Prey>();
-	public static ArrayList<Predator> predateurs = new ArrayList<Predator>();
-	public static ArrayList<Lion> lions = new ArrayList<Lion>();
-	public static ArrayList<Ours> ours = new ArrayList<Ours>();
-	public static ArrayList<Insect> insectes = new ArrayList<Insect>();
-	public static ArrayList<Mouton> moutons = new ArrayList<Mouton>();
-	public static ArrayList<Pumba> pumbas = new ArrayList<Pumba>();
-	// public int [][] myWorld=SpriteDemo.getMyWorld();
-	// public int [][] newmyWorld=SpriteDemo.getnewmyWorld();
+	public static ArrayList <Agent> agents=new ArrayList <Agent>();
+	public static ArrayList <Prey> proies=new ArrayList <Prey>();
+	public static ArrayList <Predator> predateurs=new ArrayList <Predator>();
+	public static ArrayList <Lion> lions=new ArrayList <Lion>();
+	public static ArrayList <Lion> Mouton=new ArrayList <Lion>();
 
-	public Agent() {
+	
+	public Agent(){
+	
+}
+	
+	
+	
 
-	}
-
-	public void moveDefault() {
-		int orient = (int) (Math.random() * 8);
-		int deplacement = (int) (Math.random() * endurance);
-		int i;
-		switch (orient) {
-		case 0: // nord
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi][posj - 1] == 2 || SpriteDemo.myWorld[posi][posj - 1] == 78
-					&& SpriteDemo.myWorld[posi][posj - 1] != 0 && SpriteDemo.myWorld[posi][posj - 1] != 1) {
-				SpriteDemo.newmyWorld[posi - 1][posj - 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posj-=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 1: // est
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi + 1][posj] == 2 || SpriteDemo.myWorld[posi + 1][posj] == 78
-					&& SpriteDemo.myWorld[posi + 1][posj] != 0 && SpriteDemo.myWorld[posi + 1][posj] != 1) {
-				SpriteDemo.newmyWorld[posi + 1][posj] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi+=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 2: // sud
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi][posj + 1] == 2 || SpriteDemo.myWorld[posi][posj + 1] == 78
-					&& SpriteDemo.myWorld[posi][posj + 1] != 0 && SpriteDemo.myWorld[posi][posj - 1] != 1) {
-				SpriteDemo.newmyWorld[posi][posj + 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posj+=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 3: // ouest
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi - 1][posj] == 2 || SpriteDemo.myWorld[posi - 1][posj] == 78
-					&& SpriteDemo.myWorld[posi - 1][posj] != 0 && SpriteDemo.myWorld[posi - 1][posj] != 1) {
-				SpriteDemo.newmyWorld[posi - 1][posj] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi-=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 4: // nord-est
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi + 1][posj - 1] == 2 || SpriteDemo.myWorld[posi + 1][posj - 1] == 78
-					&& SpriteDemo.myWorld[posi + 1][posj - 1] != 0 && SpriteDemo.myWorld[posi + 1][posj - 1] != 1) {
-				SpriteDemo.newmyWorld[posi + 1][posj - 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi+=1;posj-=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 5: // nord-ouest
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi - 1][posj - 1] == 2 || SpriteDemo.myWorld[posi - 1][posj - 1] == 78
-					&& SpriteDemo.myWorld[posi - 1][posj - 1] != 0 && SpriteDemo.myWorld[posi - 1][posj - 1] != 1) {
-				SpriteDemo.newmyWorld[posi - 1][posj - 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi-=1;
-				// posj-=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 6: // sud-est
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi + 1][posj + 1] == 2 || SpriteDemo.myWorld[posi + 1][posj + 1] == 78
-					&& SpriteDemo.myWorld[posi + 1][posj + 1] != 0 && SpriteDemo.myWorld[posi + 1][posj + 1] != 1) {
-				SpriteDemo.newmyWorld[posi + 1][posj + 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi+=1;posj+=1;
-			}
-			// i++;
-			// }
-			break;
-
-		case 7: // sud-ouest
-			i = 0;
-			// while (i < deplacement) {
-			if (SpriteDemo.myWorld[posi - 1][posj + 1] == 2 || SpriteDemo.myWorld[posi - 1][posj + 1] == 78
-					&& SpriteDemo.myWorld[posi - 1][posj + 1] != 0 && SpriteDemo.myWorld[posi - 1][posj + 1] != 1) {
-				SpriteDemo.newmyWorld[posi - 1][posj + 1] = id;
-				SpriteDemo.newmyWorld[posi][posj] = 2;
-				// posi-=1;posj+=1;
-			}
-			// i++;
-			// }
-			break;
-		}
-
-	}
-	// }
-
-	// abstract public int [] getNearestAgent();
-	// abstract public Agent getTarget();
-	// abstract public void eat();
-	// abstract public int setPerimeterVision();
-	// abstract public int getPerimeterVision();
-	// abstract public void moveDefault();//bouge par default si pas de cible
-	// abstract public Agent reproduce();
-	// abstract public void sleep();
-	public int[] posTypeAgentNorth() {
-		int[] tab_pos = new int[3];
-		// test nord
-		tab_pos[0] = posi - 1;
-		tab_pos[1] = posj;
-		tab_pos[2] = SpriteDemo.myWorld[posi - 1][posj];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentNorthEast() {
-		int[] tab_pos = new int[3];
-		// test nord est
-		tab_pos[0] = posi + 1;
-		tab_pos[1] = posj - 1;
-		tab_pos[2] = SpriteDemo.myWorld[posi + 1][posj - 1];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentEast() {
-		int[] tab_pos = new int[3];
-		// test est
-		tab_pos[0] = posi + 1;
-		tab_pos[1] = posj;
-		tab_pos[2] = SpriteDemo.myWorld[posi + 1][posj];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentSouthEast() {
-		int[] tab_pos = new int[3];
-		// test sud est
-		tab_pos[0] = posi + 1;
-		tab_pos[1] = posj + 1;
-		tab_pos[2] = SpriteDemo.myWorld[posi + 1][posj + 1];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentSouth() {
-		int[] tab_pos = new int[3];
-		// test sud
-		tab_pos[0] = posi;
-		tab_pos[1] = posj + 1;
-		tab_pos[2] = SpriteDemo.myWorld[posi][posj + 1];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentSouthWest() {
-		int[] tab_pos = new int[3];
-		// test sud ouest
-		tab_pos[0] = posi - 1;
-		tab_pos[1] = posj + 1;
-		tab_pos[2] = SpriteDemo.myWorld[posi - 1][posj + 1];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentWest() {
-		int[] tab_pos = new int[3];
-		// test ouest
-		tab_pos[0] = posi - 1;
-		tab_pos[1] = posj;
-		tab_pos[2] = SpriteDemo.myWorld[posi - 1][posj];
-		return tab_pos;
-	}
-
-	public int[] posTypeAgentNorthWest() {
-		int[] tab_pos = new int[3];
-		// test nord ouest
-		tab_pos[0] = posi - 1;
-		tab_pos[1] = posj + 1;
-		tab_pos[2] = SpriteDemo.myWorld[posi - 1][posj + 1];
-		return tab_pos;
-	}
+	//abstract public int [] getNearestAgent();
+	//abstract public Agent getTarget();
+	//abstract public void eat();
+	//abstract public int setPerimeterVision();
+	//abstract public int getPerimeterVision();
+	//abstract public void moveDefault();//bouge par default si pas de cible
+	//abstract public Agent reproduce();
+	//abstract public void sleep(); 
 
 	public boolean isAlive() {
 		return alive;
@@ -260,6 +71,10 @@ public abstract class Agent {
 
 	public int getAge() {
 		return age;
+	}
+
+	public void vieillis() {
+		this.age++;
 	}
 
 	public int getId() {
@@ -318,4 +133,5 @@ public abstract class Agent {
 		this.perimeterVisionDiagonal = perimeterVisionDiagonal;
 	}
 
+	
 }
