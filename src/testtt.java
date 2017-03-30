@@ -1,35 +1,19 @@
 
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 import java.awt.image.ImageObserver;
 import java.io.File;
+
+
 
 import javax.imageio.ImageIO;
 import javax.swing.JApplet;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollBar;
-
-
-
-
-import java.awt.*;
-import java.awt.event.*;
-
-import javax.swing.*;
-
-
-
-public class SpriteDemo extends JPanel {	
-private static JFrame frame;
-private Image odeur;
+public class SpriteDemo extends JPanel {
+private JFrame frame;
 private Image waterSprite;
 private Image waterSpritenuit;
 private Image waterg;
@@ -80,37 +64,16 @@ private Image timon;
 private Image brule1;
 private Image brule2;
 private Image brule3;
-private Image printemps;
 private int spriteLength = 16;
 int saison=1;
 int nuit=0;
 public static int[][] myWorld;
 public static int[][] newmyWorld;
 
-//JLabel label;
+
+ 
 public SpriteDemo(){
-	
-	 /*super(true);
-     label=new JLabel();
-     setLayout(new BorderLayout());
-
-     JScrollBar hbar=new JScrollBar(JScrollBar.HORIZONTAL, 30, 20, 0, 800);
-     JScrollBar vbar=new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0, 800);
-
-     hbar.setUnitIncrement(2);
-     hbar.setBlockIncrement(1);
-     add(hbar, BorderLayout.SOUTH);
-     add(vbar, BorderLayout.EAST);
-     add(label, BorderLayout.CENTER);
-	
-	
-	*/
-	
-	
-	
    try{
-   printemps=ImageIO.read(new File("printemps.png"));
-   odeur= ImageIO.read(new File("odeur.png"));
    buisson= ImageIO.read(new File("herbe.png"));
    waterSprite = ImageIO.read(new File("water.png"));
    waterg = ImageIO.read(new File("waterg.jpg"));
@@ -159,18 +122,15 @@ public SpriteDemo(){
 	  e.printStackTrace();
 	  System.exit(-1); 
 	  }
-   
 
   frame = new JFrame("World of Sprite");
   frame.add(this);
- // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
- // frame.setContentPane(new SpriteDemo());
-  frame.setSize(800,800);
+  frame.setSize(300,300);
   frame.setVisible(true);
   myWorld = new int[120][64];
   newmyWorld=new int[120][64];
 
-//-------------------------------------------------------------------------------INITIALISATION
+//-------------------------------------------------------------------------------------------------------------------INITIALISATION
 
    for ( int i = 0 ; i != 120 ; i++ ){
 	  for ( int j = 0 ; j != 64 ; j++ ){
@@ -222,11 +182,14 @@ public SpriteDemo(){
 		  }
 	  }
   }*/
-  
   //biche
   myWorld[20][16]=37;
   myWorld[35][24]=37;
   myWorld[70][56]=37;
+  //mouton
+ // myWorld[90][18]=38;
+ // myWorld[80][14]=38;
+ // myWorld[85][56]=38;
   //nemo
   myWorld[26][32]=24;
   myWorld[58][34]=40;
@@ -253,7 +216,7 @@ public SpriteDemo(){
   //pont
   for(int i=0;i<120;i++){
 	  for(int j=0;j<64;j++){
-		  if((i==20||i==65)&&j>=29&&j<=36){
+		  if((i==20||i==60)&&j>=30&&j<=35){
 			  myWorld[i][j]=42;
 		  }
 	  }
@@ -264,24 +227,7 @@ public SpriteDemo(){
 		  if(i>=15&&i<22&&j==20||(i>=16&&i<24&&j==21)||(i>=18&&i<23&&j==22)||(i>=75&&i<82&&j==8)||(i>=76&&i<84&&j==9)||(i>=78&&i<83&&j==10)||(i>=35&&i<42&&j==52)||(i>=37&&i<44&&j==53)||(i>=38&&i<43&&j==54)||(i>=87&&i<94&&j==48)||(i>=88&&i<96&&j==49)||(i>=90&&i<95&&j==50)){
 			  myWorld[i][j]=12;
 		  }
-	  }
-  }
-  
-  //grand point d'eau
-  for(int t=0;t<120;t++){
-	  for(int u=0;u<64;u++){
-		  if(t>=35&&t<=60&&u>=11&&u<=20){
-			  myWorld[t][u]=12;
-			  if((t==35&&u==11)||(t==35&&u==20)||(t==60&&u==11)||(t==60&&u==20)){
-				  myWorld[t][u]=2;
-			  }
-		  }
-		  if(t>=50&&t<=75&&u>=40&&u<=49){
-			  myWorld[t][u]=12;
-			  if((t==50&&u==40)||(t==50&&u==49)||(t==75&&u==40)||(t==75&&u==49)){
-				  myWorld[t][u]=2;
-			  }
-		  }
+		  
 	  }
   }
   //volcan
@@ -298,7 +244,10 @@ public SpriteDemo(){
   myWorld[24][53]=7;
   myWorld[21][53]=7;
   myWorld[25][53]=7;
- 
+  
+  
+  
+  nuit=1;
   for ( int i = 0 ; i != 120 ; i++ ){
    for ( int j = 0 ; j != 64 ; j++ ){
     if(myWorld[i][j]==2){
@@ -327,61 +276,67 @@ public SpriteDemo(){
   myWorld[l2.posi][l2.posj]=6;
   Lion l3=new Lion(30,12);
   myWorld[l3.posi][l3.posj]=6;
+  Lion l4=new Lion(40,19);
+  myWorld[l4.posi][l4.posj]=6;
   Lion l5=new Lion(50,10);
   myWorld[l5.posi][l5.posj]=6;
-  Mouton m1=new Mouton(50,10);
+  Mouton m1=new Mouton(50,12);
   myWorld[m1.posi][l1.posj]=38;
+  //Oiseau o1=new Oiseau(50,32);
+  //myWorld[o1.posi][o1.posj]=40;
+  //Oiseau o2=new Oiseau(58,34);
+ // myWorld[o2.posi][o2.posj]=40;
   
 //maj dans nouveau tableau
   for ( int i = 0 ; i != 120 ; i++ ){
 	   for ( int j = 0 ; j != 64 ; j++ ){
+		 /* if(myWorld[i][j]==41){
+			  new Hiboux(i,j);
+		   }*/
 		newmyWorld[i][j]=myWorld[i][j];   
 	   }
    }
  
-//----------------------------------------------------------------------------------------DYNAMIQUE
+//--------------------------------------------------------------------------------------------------------------------DYNAMIQUE
   int i=1;
-  int cpt=1;
   while(i<100000){
-  //saison et cycle jour/nuit
-	  if(i%50==0){
-	    cpt++;
-	  if(cpt%2==0){
-		nuit=1;
-		}else{
-		nuit=0;
-		}
-	  }
-	  if(i%175==0){
-	    saison=1; //ete
-	  }
-	  if(i%250==0){
-		saison=3; //printemps
-	  } 
-	  if(i%355==0){
-		saison=2; //hiver
-	  }
-	  
 		for(int k=0;k!=120;k++){
 			for(int l=0;l!=64;l++){
 			l1.posi=k;l1.posj=l;
 			l2.posi=k;l2.posj=l;
 			l3.posi=k;l3.posj=l;
+			l4.posi=k;l4.posj=l;
 			l5.posi=k;l5.posj=l;
 			m1.posi=k;m1.posj=l;
+			//o1.posi=k;o1.posj=l;
 			repaint();
+			//nuit
+			if(20<=i&&i<=60){
+			nuit=1;
+			}else{
+			nuit=0;
+			}
 			//lion
 			if(myWorld[k][l]==6){l1.moveDefault();}
 			if(myWorld[k][l]==38){m1.moveDefault();}
-	
+		//	if(myWorld[k][l]==40){o1.moveDefault1();}
 			
 			//hiboux
 			//if(myWorld[k][l]==41){
 				//new Hiboux(k,l).moveDefault();
 			//}
+			
+			//l1.chasse();
+			//arbreneige
+			
+			/*if(i>=61&&i<=80&&myWorld[k][l]==3){
+				saison=2;
+				
+			}*/
 		
+			
 			//crabe
-			  /*  if(myWorld[k][l]==43){
+			    if(myWorld[k][l]==43){
 				if(myWorld[k+1][l]==1){
 				newmyWorld[k+1][l]=43;
 				newmyWorld[k][l]=1;
@@ -401,13 +356,13 @@ public SpriteDemo(){
 			             }
 				       }
 				    }
-				 }*/
+				 }
 			
 			
 			
 //volcan
-
-if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWorld[k][l]!=7&&myWorld[k][l]!=42&&Math.random()<0.67){
+//myWorld[10][10]=8;
+if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWorld[k][l]!=7&&Math.random()<0.70){
 	if((myWorld[k][l+1]==8||myWorld[k-1][l]==8||myWorld[k][l-1]==8||myWorld[k+1][l]==8)){
 				if(myWorld[k][l]!=3){
 				 newmyWorld[k][l]=8;
@@ -432,25 +387,20 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 			if(myWorld[k][l]==9){
 				newmyWorld[k][l]=9;
 			}	
-			
-			if((myWorld[k][l]==9)&&i%180==0){
-				int repousse=(int)(Math.random()*2);
+			if((myWorld[k][l]==9)&&i%90==0){
 				newmyWorld[k][l]=2;
-				if(repousse==0&&Math.random()<0.2)
-				newmyWorld[k][l]=78;
-				if(repousse==1&&Math.random()<0.2)
-				newmyWorld[k][l]=3;
 			}
 			
-			if((myWorld[k][l]==9||myWorld[k][l]==2)&&i%200==0){
+			if((myWorld[k][l]==9||myWorld[k][l]==2)&&i%92==0){
 				newmyWorld[23][49]=5;
 				newmyWorld[24][51]=8;
-		  }			
+			}
+					
      }
 }
 		
 //mise a jour
-	
+		
 		for ( int x = 0 ; x != 120 ; x++ )
 			for ( int y = 0 ; y != 64 ; y++ ){
 				myWorld[x][y] = newmyWorld[x][y];
@@ -466,7 +416,6 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 }
 
 //-------------------------------------------------------------------------------------------------------------------------AFFICHAGE
-
 
 
 
@@ -492,7 +441,10 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
     	}else{
      g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
     	}
- 
+    	
+    	if(saison==2){
+    		 g2.drawImage(waterg,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+    	}
     }
     if ( myWorld[i][j] == 1 )
      g2.drawImage(sable,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
@@ -518,9 +470,6 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
         if(saison==2){
         	g2.drawImage(neige,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
         	g2.drawImage(treeSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-        }
-        if(saison==3){
-        	g2.drawImage(printemps,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
         }
     	   
        }
@@ -596,7 +545,7 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 		   g2.drawImage(waterSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
 	   }else{
 		   if(saison==2){
-			   g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+			   g2.drawImage(waterg,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 		   }else{
         g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);}
      g2.drawImage(Dory,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
@@ -606,7 +555,7 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 		   g2.drawImage(waterSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
 	   }else{
 		   if(saison==2){
-			   g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+			   g2.drawImage(waterg,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 		   }else{
 	   
         g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);}
@@ -735,7 +684,7 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 		   g2.drawImage(waterSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
 	   }else{
 		   if(saison==2){
-			   g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+			   g2.drawImage(waterg,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 		   }else{
 	
         g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);}
@@ -746,7 +695,7 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 		   g2.drawImage(waterSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
 	   }else{
 		   if(saison==2){
-			   g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+			   g2.drawImage(waterg,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 		   }else{
         g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);}
      g2.drawImage(mouette,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
@@ -764,26 +713,13 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
        }
        }
        
-       
-       if ( myWorld[i][j] == 80 ){if(nuit==1){
-		   g2.drawImage(grassSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
-	   }else{
-        g2.drawImage(grassSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);}
-        g2.drawImage(odeur,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-       
-       if(saison==2){
-    	   g2.drawImage(neige,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-       g2.drawImage(odeur,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-       }
-       }
-       
        if ( myWorld[i][j] == 42 ){
         g2.drawImage(waterSprite,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-        g2.drawImage(pont,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+     g2.drawImage(pont,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
        }
        if ( myWorld[i][j] == 43 ){
         g2.drawImage(sable,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
-        g2.drawImage(crabe,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
+     g2.drawImage(crabe,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
        }
        if ( myWorld[i][j] == 50 ){if(nuit==1){
 		   g2.drawImage(grassSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);	   
@@ -805,6 +741,8 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
           }
        
        if(myWorld[i][j]==78){
+		    
+	
 			  if(nuit==1){
 				  g2.drawImage(grassSpritenuit,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				  g2.drawImage(buisson,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
@@ -817,14 +755,20 @@ if(myWorld[k][l]!=0&&myWorld[k][l]!=12&&myWorld[k][l]!=1&&myWorld[k][l]!=5&&myWo
 			      g2.drawImage(neige,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				  g2.drawImage(buisson,spriteLength*i,spriteLength*j,spriteLength,spriteLength, frame);
 				  
-			    }
-		   }
-      }
+			  }
+		  }
+       
+       
+       }
  }
  
+
+
+
  public static void main(String[] args) {
 	 new SpriteDemo();
  }
 }
+
 
 
