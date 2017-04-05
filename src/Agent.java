@@ -24,7 +24,7 @@ public abstract class Agent {
 	public static ArrayList<Insecte> insectes = new ArrayList<Insecte>();
 	public static ArrayList<Mouton> moutons = new ArrayList<Mouton>();
 	public static ArrayList<Pumba> pumbas = new ArrayList<Pumba>();
-	
+	public static ArrayList<Biche> biches = new ArrayList<Biche>();
 	
 	public Agent(){
 	
@@ -43,8 +43,10 @@ public abstract class Agent {
 	//abstract public void sleep(); 
 	public void vieillis() {
 		this.age++;
-		if (this.age > 200)
-			this.meurt();
+		reserve_food--;
+		reserve_eau--;
+		//if (this.age > 200)
+			//this.meurt();
 	}
 	public void meurt() {
 		this.alive = false;
