@@ -16,7 +16,7 @@ public class Pumba extends Predator {
 		pumbas.add(this);
 	}
 
-	public void moveDefault1() {
+	/*public void moveDefault() {
 		int orient = (int) (Math.random() * 8);
 		// int deplacement=(int)( Math.random()*endurance);
 		// int i;
@@ -135,8 +135,9 @@ public class Pumba extends Predator {
 			break;
 		}
 	}
+	*/
 
-	public void eat() {
+	/*public void eat() {
 		int compteur_mange = 0;// compteur pour qu'il ne mange qu'un seul agent
 		for (Insecte i : insectes) {
 			if (posTypeAgentNorthEast()[2] == i.id && compteur_mange < 1) {
@@ -213,7 +214,7 @@ public class Pumba extends Predator {
 
 		}
 	}
-	
+	*/
 	public void parasite(){
 		if(this.getInfecte()){
 			//chasse() chasse son predateur

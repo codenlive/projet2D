@@ -75,23 +75,15 @@ public class SpriteDemo extends JPanel {
 	private Image brule2;
 	private Image brule3;
 	private Image printemps;
-	private int spriteLength = 16;
+	private int spriteLength = 40;
 	int saison = 1;
 	public static int nuit = 0;
 	public static int[][] myWorld;
-	public static int [][] pas;
 	public static int[][] newmyWorld;
 
 	// JLabel label;
 	public SpriteDemo() {
-		/*
-		 * super(true); label=new JLabel(); setLayout(new BorderLayout());
-		 * JScrollBar hbar=new JScrollBar(JScrollBar.HORIZONTAL, 30, 20, 0,
-		 * 800); JScrollBar vbar=new JScrollBar(JScrollBar.VERTICAL, 30, 40, 0,
-		 * 800); hbar.setUnitIncrement(2); hbar.setBlockIncrement(1); add(hbar,
-		 * BorderLayout.SOUTH); add(vbar, BorderLayout.EAST); add(label,
-		 * BorderLayout.CENTER);
-		 */
+
 		try {
 			printemps = ImageIO.read(new File("printemps.png"));
 			odeur = ImageIO.read(new File("odeur.png"));
@@ -110,7 +102,7 @@ public class SpriteDemo extends JPanel {
 			lave = ImageIO.read(new File("lave.png"));
 			brule = ImageIO.read(new File("brule.png"));
 			lac = ImageIO.read(new File("lac.jpg"));
-			arbreneige = ImageIO.read(new File("arbrehiver.jpg"));
+			arbreneige = ImageIO.read(new File("arbrehiver.png"));
 			neige = ImageIO.read(new File("neige.png"));
 			abeille = ImageIO.read(new File("abeille.gif"));// 20
 			fourmis = ImageIO.read(new File("ant.gif"));// 21
@@ -118,16 +110,16 @@ public class SpriteDemo extends JPanel {
 			Dory = ImageIO.read(new File("Dory.gif"));// 23
 			nemo = ImageIO.read(new File("nemo.png"));// 24
 			girafe = ImageIO.read(new File("girafe.gif"));// 25
-			hyena = ImageIO.read(new File("hyena.gif"));// 26
+			hyena = ImageIO.read(new File("hyena.png"));// 26
 			insectenuit = ImageIO.read(new File("insectenuit.gif"));// 27
 			moustique = ImageIO.read(new File("Moustique.gif"));// 28
 			oursblanc = ImageIO.read(new File("ours_polaire.png"));// 29
 			oursnoir = ImageIO.read(new File("ours.png"));// 30
 			panthere = ImageIO.read(new File("panthere.png"));// 31
-			// pinguin = ImageIO.read(new File("penguin.png"));// 32
+			pinguin = ImageIO.read(new File("penguin.png"));// 32
 			piranha = ImageIO.read(new File("piranha.gif"));// 33
 			poison = ImageIO.read(new File("poison.gif"));// 34
-			pumba = ImageIO.read(new File("pumba.gif"));// 35
+			pumba = ImageIO.read(new File("girafon.png"));// 35
 			sauterelle = ImageIO.read(new File("sauterelle.gif"));// 36
 			biche = ImageIO.read(new File("biche.png"));// 37
 			mouton = ImageIO.read(new File("sheep.png"));// 38
@@ -145,19 +137,21 @@ public class SpriteDemo extends JPanel {
 		}
 		frame = new JFrame("World of Sprite");
 		frame.add(this);
-		frame.setSize(800, 800);
+		frame.setSize(400, 400);
 		frame.setVisible(true);
-		myWorld = new int[120][64];
-		newmyWorld = new int[120][64];
-		pas=new int[120][64];
-		// ------------------------------------INITIALISATION------------------------------------------------
-		for (int i = 0; i != 120; i++) {
-			for (int j = 0; j != 64; j++) {
+		myWorld = new int[200][200];
+		newmyWorld = new int[200][200];
+
+		// -------------------------------------------------------------------------------INITIALISATION
+
+		for (int i = 0; i != 120; i++) {// 120
+			for (int j = 0; j != 64; j++) {// 64
 				// paysage1
 				// sable
 				myWorld[i][j] = 0;
-				if (j == 2 && (i >= 2 && i <= 70) || j == 29 && (i >= 2 && i <= 70)
-						|| (j >= 3 && j <= 29) && (i == 2)) {
+				if (j == 2 && (i >= 2 && i <= 70) || j == 29
+						&& (i >= 2 && i <= 70) || (j >= 3 && j <= 29)
+						&& (i == 2)) {
 					myWorld[i][j] = 1; // sable
 				}
 				// fond_vert
@@ -165,7 +159,8 @@ public class SpriteDemo extends JPanel {
 					myWorld[i][j] = 2;
 				// paysage 2
 				// sable
-				if ((i >= 18 && i <= 80) && (j == 36 || j == 58) || ((i == 18) && (j >= 36 && j <= 58))) {
+				if ((i >= 18 && i <= 80) && (j == 36 || j == 58)
+						|| ((i == 18) && (j >= 36 && j <= 58))) {
 					myWorld[i][j] = 1;
 				}
 				// fond_vert
@@ -174,19 +169,24 @@ public class SpriteDemo extends JPanel {
 				}
 				// paysage 3
 				// sable
-				if ((i >= 70 && i <= 110) && (j == 2) || (i == 110 && (j >= 2 && j <= 58))
-						|| (j == 29 && (i >= 70 && i <= 80)) || ((j >= 29 && j <= 36) && (i == 80))
+				if ((i >= 70 && i <= 110) && (j == 2)
+						|| (i == 110 && (j >= 2 && j <= 58))
+						|| (j == 29 && (i >= 70 && i <= 80))
+						|| ((j >= 29 && j <= 36) && (i == 80))
 						|| ((j == 58) && (i >= 80 && i <= 110))) {
 					myWorld[i][j] = 1;
 				}
 				// fond_vert
-				if (((j > 2 && j < 29) && (i > 70 && i < 110)) || ((i > 80 && i < 110) && (j >= 29 && j < 58))) {
+				if (((j > 2 && j < 29) && (i > 70 && i < 110))
+						|| ((i > 80 && i < 110) && (j >= 29 && j < 58))) {
 					myWorld[i][j] = 2;
 				}
-				if (i <= 100 && i >= 4 && j >= 3 && j <= 29 && j >= 3 && myWorld[i][j] == 0) {
+				if (i <= 100 && i >= 4 && j >= 3 && j <= 29 && j >= 3
+						&& myWorld[i][j] == 0) {
 					myWorld[i][j] = 2;
 				}
-				if (i <= 80 && i >= 18 && j >= 36 && j <= 58 && myWorld[i][j] == 0) {
+				if (i <= 80 && i >= 18 && j >= 36 && j <= 58
+						&& myWorld[i][j] == 0) {
 					myWorld[i][j] = 2;
 				}
 			}
@@ -199,9 +199,9 @@ public class SpriteDemo extends JPanel {
 		 */
 
 		// biche
-		myWorld[20][16] = 37;
-		myWorld[35][24] = 37;
-		myWorld[70][56] = 37;
+		// myWorld[20][16]=37;
+		// myWorld[35][24]=37;
+		// myWorld[70][56]=37;
 		// nemo
 		myWorld[26][32] = 24;
 		myWorld[58][34] = 40;
@@ -228,21 +228,27 @@ public class SpriteDemo extends JPanel {
 		// Pumba pumba=new Pumba(100,20);
 		// myWorld[100][20]=35;
 		// pont
-		for (int i = 0; i < 120; i++) {
+		/*for (int i = 0; i < 120; i++) {
 			for (int j = 0; j < 64; j++) {
 				if ((i == 20 || i == 65) && j >= 29 && j <= 36) {
 					myWorld[i][j] = 42;
 				}
 			}
-		}
+		}*/
 		// 4 flaques d'eau
 		for (int i = 0; i < 120; i++) {
 			for (int j = 0; j < 64; j++) {
-				if (i >= 15 && i < 22 && j == 20 || (i >= 16 && i < 24 && j == 21) || (i >= 18 && i < 23 && j == 22)
-						|| (i >= 75 && i < 82 && j == 8) || (i >= 76 && i < 84 && j == 9)
-						|| (i >= 78 && i < 83 && j == 10) || (i >= 35 && i < 42 && j == 52)
-						|| (i >= 37 && i < 44 && j == 53) || (i >= 38 && i < 43 && j == 54)
-						|| (i >= 87 && i < 94 && j == 48) || (i >= 88 && i < 96 && j == 49)
+				if (i >= 15 && i < 22 && j == 20
+						|| (i >= 16 && i < 24 && j == 21)
+						|| (i >= 18 && i < 23 && j == 22)
+						|| (i >= 75 && i < 82 && j == 8)
+						|| (i >= 76 && i < 84 && j == 9)
+						|| (i >= 78 && i < 83 && j == 10)
+						|| (i >= 35 && i < 42 && j == 52)
+						|| (i >= 37 && i < 44 && j == 53)
+						|| (i >= 38 && i < 43 && j == 54)
+						|| (i >= 87 && i < 94 && j == 48)
+						|| (i >= 88 && i < 96 && j == 49)
 						|| (i >= 90 && i < 95 && j == 50)) {
 					myWorld[i][j] = 12;
 				}
@@ -254,13 +260,15 @@ public class SpriteDemo extends JPanel {
 			for (int u = 0; u < 64; u++) {
 				if (t >= 35 && t <= 60 && u >= 11 && u <= 20) {
 					myWorld[t][u] = 12;
-					if ((t == 35 && u == 11) || (t == 35 && u == 20) || (t == 60 && u == 11) || (t == 60 && u == 20)) {
+					if ((t == 35 && u == 11) || (t == 35 && u == 20)
+							|| (t == 60 && u == 11) || (t == 60 && u == 20)) {
 						myWorld[t][u] = 2;
 					}
 				}
 				if (t >= 50 && t <= 75 && u >= 40 && u <= 49) {
 					myWorld[t][u] = 12;
-					if ((t == 50 && u == 40) || (t == 50 && u == 49) || (t == 75 && u == 40) || (t == 75 && u == 49)) {
+					if ((t == 50 && u == 40) || (t == 50 && u == 49)
+							|| (t == 75 && u == 40) || (t == 75 && u == 49)) {
 						myWorld[t][u] = 2;
 					}
 				}
@@ -270,8 +278,8 @@ public class SpriteDemo extends JPanel {
 		myWorld[26][53] = 8;
 		myWorld[24][51] = 8;
 		myWorld[25][52] = 8;
-		myWorld[23][50] = 5;
-		myWorld[23][51] = 7;
+		myWorld[40][54] = 5; //23 55
+	/*	myWorld[23][51] = 7;
 		myWorld[23][52] = 7;
 		myWorld[22][52] = 7;
 		myWorld[24][52] = 7;
@@ -279,12 +287,12 @@ public class SpriteDemo extends JPanel {
 		myWorld[22][53] = 7;
 		myWorld[24][53] = 7;
 		myWorld[21][53] = 7;
-		myWorld[25][53] = 7;
+		myWorld[25][53] = 7;*/
 
 		for (int i = 0; i != 120; i++) {
 			for (int j = 0; j != 64; j++) {
 				if (myWorld[i][j] == 2) {
-					if (Math.random() < 0.2) {
+					if (Math.random() < 0.05) { //0.05
 						myWorld[i][j] = 3;
 					}
 
@@ -302,25 +310,29 @@ public class SpriteDemo extends JPanel {
 				}
 			}
 		}
-		
 		// initialisation des animaux
 		Lion l1 = new Lion(10, 10);
 		Lion l2 = new Lion(20, 11);
 		Lion l3 = new Lion(30, 12);
-		Mouton m6=new Mouton(8,8);
-		Mouton m7=new Mouton(12,12);
-		Mouton m8=new Mouton(13,12);
 		Lion l5 = new Lion(50, 10);
-		Moustique mous=new Moustique(5,17);
 		// Pumba pumba=new Pumba(110,20);
 		Mouton m1 = new Mouton(50, 10);
 		Lion p1 = new Lion(100, 50);
 		Lion p2 = new Lion(95, 50);
-		for (int i = 0; i < 20; i++) {
+		Insecte ins = new Insecte(63, 54);
+		Pumba pum = new Pumba(65, 53);
+		Biche bic = new Biche(20, 16);
+		// Biche b1=new Biche(35,24);
+		// Biche b2=new Biche(70,56);
+		for (int i = 0; i < 10; i++) {
+
+			new Pumba(67 + i, 54);
 			new Mouton(95, 30 + i);
 			new Mouton(25 + i, 40);
 			new Lion(50 + i, 20);
 		}
+
+		System.out.println(Agent.lions.size());
 		// maj dans nouveau tableau
 		for (int i = 0; i != 120; i++) {
 			for (int j = 0; j != 64; j++) {
@@ -329,80 +341,94 @@ public class SpriteDemo extends JPanel {
 		}
 
 		// ----------------------------------------------------------------------------------------DYNAMIQUE
+
 		int i = 1;
 		int cpt = 1;
 		int cptsaison = 1;
-		
-		
-		
 		while (i < 100000) {
+			m1.vieillis();
+			bic.vieillis();
 			// saison et cycle jour/nuit
-			if (i % 30 == 0) {
+			if (i % 50 == 0) {
 				cpt++;
-				if (cpt % 2 == 0)
+				if (cpt % 2 == 0) {
 					nuit = 1;
-				else
+				} else {
 					nuit = 0;
-
+				}
 			}
 
 			if (i % 150 == 0) {
 				cptsaison++;
-
 				if (cptsaison % 3 == 1)
 					saison = 1; // ete
-
-				if (cptsaison % 3 == 2)
-					saison = 3; // printemps
-
-				if (cptsaison % 3 == 0)
+				if (cptsaison % 3 == 2) {
+					saison = 3;
+				} // printemps
+				if (cptsaison % 3 == 0) {
 					saison = 2; // hiver
-
+				}
 			}
 
 			for (int k = 0; k != 120; k++) {
 				for (int l = 0; l != 64; l++) {
+					if(saison==3&&newmyWorld[k][l]==2){
+						if(Math.random()<0.4){
+							newmyWorld[k][l]=78;//apparition d herbe
+						}
+					}
+					
+					if(saison==2&&newmyWorld[k][l]==78){
+						if(Math.random()<0.01){
+							newmyWorld[k][l]=2;//disparition d herbe
+						}
+					}
+					
+					
+					
 					l1.posi = k;
 					l1.posj = l;
-
 					m1.posi = k;
 					m1.posj = l;
-					
-					mous.posi=k;
-					mous.posj=l;
+					ins.posi = k;
+					ins.posj = l;
+					pum.posi = k;
+					pum.posj = l;
+					bic.posi = k;
+					bic.posj = l;
+
 					// pumba.posi=k;pumba.posj=l;
 					repaint();
 					// lion
-
 					if (myWorld[k][l] == 6) {
-						l1.ancien_affichage();
 						l1.moveDefault();
-						l1.eat();
-						l1.nouvel_affichage();
-
-						//l1.hunt();
 					}
-
 					if (myWorld[k][l] == 38) {
-						m1.ancien_affichage();
+						m1.eat();
 						m1.moveDefault();
-						m1.nouvel_affichage();
 					}
-					
-					if (myWorld[k][l] == mous.id) {
-						//mous.ancien_affichage();
-						mous.moveDefault();
-						mous.va_contaminer();
-						//mous.nouvel_affichage();
+					if (myWorld[k][l] == 27) {
+						ins.moveDefault();
+						ins.autoReproduce();
 					}
+					if (myWorld[k][l] == 35) {
+						pum.moveDefault();
+					}
+					if (myWorld[k][l] == 37) {
+						bic.eat();
+						bic.moveDefault();
+					}
+
 					// if(myWorld[k][l]==35){pumba.moveDefault1();}
 
 					// volcan
 
-					if (myWorld[k][l] != 0 && myWorld[k][l] != 12 && myWorld[k][l] != 1 && myWorld[k][l] != 5
-							&& myWorld[k][l] != 7 && myWorld[k][l] != 42 && Math.random() < 0.67) {
-						if ((myWorld[k][l + 1] == 8 || myWorld[k - 1][l] == 8 || myWorld[k][l - 1] == 8
-								|| myWorld[k + 1][l] == 8)) {
+					if (myWorld[k][l] != 0 && myWorld[k][l] != 12
+							&& myWorld[k][l] != 1 && myWorld[k][l] != 5
+							&& myWorld[k][l] != 7 && myWorld[k][l] != 42
+							&& Math.random() < 0.57) {  //0.57
+						if ((myWorld[k][l + 1] == 8 || myWorld[k - 1][l] == 8
+								|| myWorld[k][l - 1] == 8 || myWorld[k + 1][l] == 8)) {
 							if (myWorld[k][l] != 3) {
 								newmyWorld[k][l] = 8;
 							} else {
@@ -436,8 +462,9 @@ public class SpriteDemo extends JPanel {
 							newmyWorld[k][l] = 3;
 					}
 
-					if ((myWorld[k][l] == 9 || myWorld[k][l] == 2) && i % 200 == 0) {
-						newmyWorld[23][49] = 5;
+					if ((myWorld[k][l] == 9 || myWorld[k][l] == 2)
+							&& i % 200 == 0) {
+						newmyWorld[18][49] = 5;
 						newmyWorld[24][51] = 8;
 					}
 				}
@@ -452,7 +479,7 @@ public class SpriteDemo extends JPanel {
 
 			i++;
 			try {
-				Thread.sleep(100);
+				Thread.sleep(250);
 			} catch (InterruptedException e) {
 			}
 		}
@@ -461,473 +488,542 @@ public class SpriteDemo extends JPanel {
 
 	// -------------------------------------------------------------------------------------------------------------------------AFFICHAGE
 
+	// ::::::::::::::::::::::::
+	public int xToIso(int i, int j) {
+		return ((i + 80 - j - 50) * spriteLength / 2) + 20;
+	}
+
+	public int yToIso(int i, int j) {
+		return ((j) * spriteLength / 3) + 5;
+	}
+
+	// ::::::::::::::::::::::::
+
 	public void paint(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 
 		for (int i = 0; i < myWorld.length; i++)
 			for (int j = 0; j < myWorld[0].length; j++) {
 
+				int x = xToIso(i, j);
+				int y = yToIso(i, j);
+
 				if (myWorld[i][j] == 6) { // lion6,water0,sable1,grass2,arbre3,montagne4,volcano5,boutvolcan7,lave8,brule9,lac12
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);// spriteLength*i spriteLength*j
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(lion, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(lion, x, y, spriteLength - 80,
+							spriteLength - 80, frame);
 				}
 				if (myWorld[i][j] == 0) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
 
 				}
 				if (myWorld[i][j] == 1)
-					g2.drawImage(sable, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(sable, x, y, spriteLength, spriteLength, frame);
 				if (myWorld[i][j] == 2) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					}
 
 				}
 				if (myWorld[i][j] == 3) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(treeSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(treeSprite, x, y, spriteLength - 100,
+							spriteLength - 140, frame);
 
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-						g2.drawImage(treeSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
+						g2.drawImage(arbreneige, x, y, spriteLength - 100,
+								spriteLength - 140, frame);
 					}
 					if (saison == 3) {
-						g2.drawImage(printemps, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(printemps, x, y, spriteLength - 100,
+								spriteLength - 140, frame);
 					}
 
 				}
 				if (myWorld[i][j] == 4) {
-					g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-					g2.drawImage(montagne, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(grassSprite, x, y, spriteLength, spriteLength,
+							frame);
+					g2.drawImage(montagne, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 5) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(volcano, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(volcano, x, y, spriteLength-350, spriteLength-500,
+							frame);
 				}
 				if (myWorld[i][j] == 7) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(boutvolcan, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(boutvolcan, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 8) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(lave, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(lave, x, y, spriteLength-100, spriteLength-100, frame);
 				}
 				if (myWorld[i][j] == 9) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(brule, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(brule, x, y, spriteLength, spriteLength, frame);
 				}
 				if (myWorld[i][j] == 13) {// arbre neige
-					g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-					g2.drawImage(arbreneige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(neige, x, y, spriteLength, spriteLength, frame);
+					g2.drawImage(arbreneige, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 14) {// neige
-					g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(neige, x, y, spriteLength, spriteLength, frame);
 				}
 				if (myWorld[i][j] == 12) {
 
-					g2.drawImage(lac, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(lac, x, y, spriteLength, spriteLength, frame);
 
 				}
 				if (myWorld[i][j] == 20) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(abeille, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(abeille, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 21) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(fourmis, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(fourmis, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 22) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(chauvesouris, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(chauvesouris, x, y, spriteLength,
+							spriteLength, frame);
 				}
 				if (myWorld[i][j] == 23) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
 						if (saison == 2) {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						} else {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
-						g2.drawImage(Dory, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(Dory, x, y, spriteLength, spriteLength,
+								frame);
 					}
 				}
 				if (myWorld[i][j] == 24) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
 						if (saison == 2) {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						} else {
 
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
-						g2.drawImage(nemo, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(nemo, x, y, spriteLength + 70,
+								spriteLength + 70, frame);
 					}
 				}
 				if (myWorld[i][j] == 25) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(girafe, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(girafe, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 26) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(hyena, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(hyena, x, y, spriteLength-95, spriteLength-95, frame);
 				}
 				if (myWorld[i][j] == 27) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(insectenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(insectenuit, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 28) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(moustique, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(moustique, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 29) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(oursblanc, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(oursblanc, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 30) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(oursnoir, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(oursnoir, x, y, spriteLength-90, spriteLength-80,
+							frame);
 				}
 				if (myWorld[i][j] == 31) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(panthere, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(panthere, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 32) {
-					g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-					g2.drawImage(pinguin, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(waterSprite, x, y, spriteLength, spriteLength,
+							frame);
+					g2.drawImage(pinguin, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 33) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(piranha, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(piranha, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 34) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(poison, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(poison, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 35) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(pumba, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(pumba, x, y, spriteLength - 120,
+							spriteLength - 150, frame);
 				}
 				if (myWorld[i][j] == 36) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(sauterelle, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(sauterelle, x, y, spriteLength, spriteLength,
+							frame);
 				}
 				if (myWorld[i][j] == 37) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(biche, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(biche, x, y, spriteLength - 70,
+							spriteLength - 70, frame);
 				}
 				if (myWorld[i][j] == 38) {
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
 					} else {
 						if (nuit == 1) {
-							g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength,
+							g2.drawImage(grassSpritenuit, x, y, spriteLength,
 									spriteLength, frame);
 						} else {
-							g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(grassSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
 					}
-					g2.drawImage(mouton, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(mouton, x, y, spriteLength - 70,
+							spriteLength - 70, frame);
 				}
 				if (myWorld[i][j] == 39) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
 						if (saison == 2) {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						} else {
 
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
-						g2.drawImage(requin, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(requin, x, y, spriteLength + 70,
+								spriteLength + 70, frame);
 					}
 				}
 				if (myWorld[i][j] == 40) {
 					if (nuit == 1) {
-						g2.drawImage(waterSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(waterSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
 						if (saison == 2) {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						} else {
-							g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-									frame);
+							g2.drawImage(waterSprite, x, y, spriteLength,
+									spriteLength, frame);
 						}
-						g2.drawImage(mouette, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(mouette, x, y, spriteLength, spriteLength,
+								frame);
 					}
 				}
 				if (myWorld[i][j] == 41) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(hiboux, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(hiboux, x, y, spriteLength, spriteLength,
+							frame);
 
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-						g2.drawImage(hiboux, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
+						g2.drawImage(hiboux, x, y, spriteLength, spriteLength,
+								frame);
 					}
 				}
 
 				if (myWorld[i][j] == 80) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(odeur, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					// g2.drawImage(odeur,x,y,spriteLength,spriteLength, frame);
 
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-						g2.drawImage(odeur, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
+						// g2.drawImage(odeur,x,y,spriteLength,spriteLength,
+						// frame);
 					}
 				}
 
 				if (myWorld[i][j] == 42) {
-					g2.drawImage(waterSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-					g2.drawImage(pont, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(waterSprite, x, y, spriteLength, spriteLength,
+							frame);
+					g2.drawImage(pont, x, y, spriteLength, spriteLength, frame);
 				}
 				if (myWorld[i][j] == 43) {
-					g2.drawImage(sable, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-					g2.drawImage(crabe, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(sable, x, y, spriteLength, spriteLength, frame);
+					g2.drawImage(crabe, x, y, spriteLength, spriteLength, frame);
 				}
 				if (myWorld[i][j] == 50) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(brule1, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(brule1, x, y, spriteLength - 100,
+							spriteLength - 140, frame);
 				}
 				if (myWorld[i][j] == 51) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(brule2, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(brule2, x, y, spriteLength - 100,
+							spriteLength - 140, frame);
 				}
 				if (myWorld[i][j] == 52) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
 					} else {
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
 					}
-					g2.drawImage(brule3, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+					g2.drawImage(brule3, x, y, spriteLength - 100,
+							spriteLength - 140, frame);
 				}
 
 				if (myWorld[i][j] == 78) {
 					if (nuit == 1) {
-						g2.drawImage(grassSpritenuit, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
-						g2.drawImage(buisson, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(grassSpritenuit, x, y, spriteLength,
+								spriteLength, frame);
+						g2.drawImage(buisson, x, y, spriteLength - 70,
+								spriteLength - 70, frame);
 					} else {
 
-						g2.drawImage(grassSprite, spriteLength * i, spriteLength * j, spriteLength, spriteLength,
-								frame);
-						g2.drawImage(buisson, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(grassSprite, x, y, spriteLength,
+								spriteLength, frame);
+						g2.drawImage(buisson, x, y, spriteLength - 70,
+								spriteLength - 70, frame);
 					}
 					if (saison == 2) {
-						g2.drawImage(neige, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
-						g2.drawImage(buisson, spriteLength * i, spriteLength * j, spriteLength, spriteLength, frame);
+						g2.drawImage(neige, x, y, spriteLength, spriteLength,
+								frame);
+						g2.drawImage(buisson, x, y, spriteLength - 70,
+								spriteLength - 70, frame);
 
 					}
 				}
@@ -936,5 +1032,6 @@ public class SpriteDemo extends JPanel {
 
 	public static void main(String[] args) {
 		new SpriteDemo();
+
 	}
 }
